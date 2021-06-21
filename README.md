@@ -13,17 +13,8 @@ This repository contains the scripts required to measure temperature and humidit
 The BLE client is the computer running Python using [bleak](https://github.com/hbldh/bleak) python package. 
 
 #Determine ESP32 address
-To run the code BLE_DHT_BME_RT python code, it is necessary to determine the address of the ESP32. It is a different process for Macs and PCs. For Macs, run ```discover.py``` from the bleak examples and the address will be listed next to the ESP32DHT (which is the names assigned in the ESP32 code). It will look something like: ```6C9F597F-3452-4AAB-806B-D2558588D50D```. For the PC you need to run a script on the ESP32 shown [here](https://randomnerdtutorials.com/get-change-esp32-esp8266-mac-address-arduino/) and it will be something like ```21:71:86:CC:09:05```.
+To run the code BLE_DHT_BME_RT python code, it is necessary to determine the address of the ESP32. It is a different process for Macs and PCs. For Macs, run ```discover.py``` from the bleak examples and the address will be listed next to the ESP32DHT (which is the names assigned in the ESP32 code). It will look similar to: ```6C9F597F-3452-4AAB-806B-D2558588D50D```. For the PC you need to run a script on the ESP32 shown [here](https://randomnerdtutorials.com/get-change-esp32-esp8266-mac-address-arduino/) and it will be something like ```21:71:86:CC:09:05```.
 
+Determine the Handle number associated with each characterisitic.
  
 
-
-
-
-
-```if __name__ == "__main__":
-    address = (
-        "24:71:89:cc:09:05"
-        if platform.system() != "Darwin"
-        else "6C9F597F-7085-4AAB-806B-D2558588D50D"
-    )```
