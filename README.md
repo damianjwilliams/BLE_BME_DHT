@@ -1,4 +1,4 @@
-# BLE_BME_DHT
+# BLE_DHT_DME_RT
 
 This repository contains the scripts required to measure temperature and humidity using DHT11, DHT22 and BME280 sensors hooked up to an ESP32 microcontroller. Sensor data is streamed via Bluetooth Low Energy to a computer running Python. The data is plotted in real-time using pyqtgraph. 
 
