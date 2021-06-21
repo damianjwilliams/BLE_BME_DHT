@@ -36,14 +36,13 @@ class Window(pg.GraphicsLayoutWidget):
         plot1.setYRange(15, 30, padding=0)
         plot2.setYRange(30, 80, padding=0)
 
-        #self._save_data = [0]*7
+       
         self._save_data = []
 
 
         self._bme_humi_data = deque([0] * length_window)
         self._curve1 = plot1.plot(self.bme_humi_data,pen='r')
-        #
-        
+     
         self._bme_temp_data = deque([0] * length_window)
         self._curve2 = plot2.plot(self.bme_temp_data,pen ='r')
 
@@ -58,17 +57,6 @@ class Window(pg.GraphicsLayoutWidget):
 
         self._dht22_temp_data = deque([0] * length_window)
         self._curve6 = plot2.plot(self.dht22_temp_data, pen = 'y')
-
-
-
-
-
-
-
-
-
-
-
         
         self._client = BleakClient(address, loop=self._loop)
 
@@ -163,13 +151,6 @@ class Window(pg.GraphicsLayoutWidget):
         await self.client.stop_notify(HUMIDHT22_CHAR_UUID)
 
 
-
-
-
-
-
-
-
         QtCore.QTimer.singleShot(1000, self.start_read)
 
     def notification_handler(self, sender, data):
@@ -194,14 +175,9 @@ class Window(pg.GraphicsLayoutWidget):
         elif sender == 53:
             self.update_plot5(measurement)
 
-
-
         elif sender == 56:
             self.update_plot6(measurement)
-            #self.update_tempdht(measurement)
-            #self.update_humidht(measurement)
-
-
+            
 
         if(len(self.save_data)==6):
             print(self.save_data)
@@ -218,94 +194,55 @@ class Window(pg.GraphicsLayoutWidget):
         self.bme_humi_data.popleft()
         self.curve1.setData(self.bme_humi_data)
         self.save_data.append(humibme)
+        
 
     def update_plot2(self, tempbme):
+        
         self.bme_temp_data.append(tempbme)
         self.bme_temp_data.popleft()
         self.curve2.setData(self.bme_temp_data)
         self.save_data.append(tempbme)
-
-        #self.save_data[2] = tempbme
+        
 
     def update_plot3(self, humidht11):
-
+        
         self._dht11_humi_data.append(humidht11)
         self.dht11_humi_data.popleft()
         self.curve3.setData(self.dht11_humi_data)
         self.save_data.append(humidht11)
-        #self.save_data[3] = humidht11
+        
 
     def update_plot4(self, tempdht11):
+        
         self.dht11_temp_data.append(tempdht11)
         self.dht11_temp_data.popleft()
         self.curve4.setData(self.dht11_temp_data)
         self.save_data.append(tempdht11)
-        #self.save_data[4] = tempdht11
+        
 
     def update_plot5(self, humidht22):
-
+        
         self.dht22_humi_data.append(humidht22)
         self.dht22_humi_data.popleft()
         self.curve5.setData(self.dht22_humi_data)
         self.save_data.append(humidht22)
-        #self.save_data[5] = humidht11
+        
 
     def update_plot6(self, tempdht22):
+        
         self.dht22_temp_data.append(tempdht22)
         self.dht22_temp_data.popleft()
         self.curve6.setData(self.dht22_temp_data)
         self.save_data.append(tempdht22)
-        #self.save_data[6] = tempdht11
-
-
-
-
-
+        
 
     def log_data(self):
 
-        print(self.save_data)
-        # with open("C:/Users/Damian/Desktop/test_data.csv", "a") as f:
+        print(self.save_data)        
         with open("/Users/damianwilliams/Desktop/test_data.csv", "a") as f:
             writer = csv.writer(f, delimiter=",")
             writer.writerow(self.save_data)
-            #writer.writerow(self.save_data)
-
-
-
-
-
-
-
-
-
-
-    #def add_to_temp(self, humidht11):
-
-     #   self.dht22_temp_data.popleft()
-     #   self.curve6.setData(self.dht22_temp_data)
-
-
-
-
-
-
-
-    # def logtemp(self, humibme,tempbme,humidht11,tempdht11,humidht22,tempdht22):
-    # #with open("C:/Users/Damian/Desktop/test_data.csv", "a") as f:
-    #     with open("/Users/damianwilliams/Desktop/test_data.csv", "a") as f:
-    #         writer = csv.writer(f, delimiter=",")
-    #         writer.writerow([time.time(), humibme,tempbme,humidht11,tempdht11,humidht22,tempdht22])
-    #
-    # def logtemp(self, humibme,tempbme):#,tempbme,humidht11,tempdht11,humidht22,tempdht22):
-    #    #with open("C:/Users/Damian/Desktop/test_data.csv", "a") as f:
-    #      with open("/Users/damianwilliams/Desktop/test_data.csv", "a") as f:
-    #         writer = csv.writer(f, delimiter=",")
-    #         writer.writerow([time.time(), humibme,tempbme])
-
-
-
-
+            
 
 def main(args):
     app = QtGui.QApplication(args)
