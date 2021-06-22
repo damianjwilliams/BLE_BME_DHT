@@ -1,6 +1,6 @@
 # BLE_DHT_DME_RT
 
-This repository contains the scripts required to measure temperature and humidity using DHT11, DHT22 and BME280 sensors hooked up to an ESP32 microcontroller acting as a server. Sensor data is streamed via Bluetooth Low Energy to a client computer running Python. The data is plotted in real-time using pyqtgraph. You can see it in action on this [video](https://youtu.be/ymS4U1X46Kg)
+This repository contains the scripts required to measure temperature and humidity using DHT11, DHT22 and BME280 sensors hooked up to an ESP32 microcontroller acting as a server. Sensor data is streamed via Bluetooth Low Energy to a client computer running Python. The data is plotted in real-time using pyqtgraph. You can see it in action on this [video](https://youtu.be/ymS4U1X46Kg).
 
  The ESP32 was purchased from [Amazon](https://www.amazon.com/MELIFE-Development-Dual-Mode-Microcontroller-Integrated/dp/B07Q576VWZ/ref=cm_cr_arp_d_product_top?ie=UTF8). ESP32 installation instructions can be found [here](https://randomnerdtutorials.com/installing-the-esp32-board-in-arduino-ide-windows-instructions/). It will work using the 'ESP32 Dev Module' board setting in the Arduino IDE. More information aboult ESP32 and Bluetooth Low Energy can be found in another great [Random Nerd Tutorial](https://randomnerdtutorials.com/esp32-bluetooth-low-energy-ble-arduino-ide/). The ESP32 BLE code was based on the 'BLE_server' code from the ESP32 BLE Arduino library. Automatically installed when you install the ESP32 on the Arduino IDE. 
 
