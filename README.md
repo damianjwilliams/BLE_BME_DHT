@@ -13,7 +13,7 @@ This repository contains the scripts required to measure temperature and humidit
 
 ## Usage
 
-ESP32 (Server)
+**ESP32 (Server)**
  - Wire up sensors and ESP as shown below
  
 ![My image](https://github.com/damianjwilliams/BLE_DHT_BME_RT/blob/main/BLE_DHT_BME_RT.png)
@@ -23,7 +23,7 @@ Upload the ESP32 and sensor libraries to the ESP32
 Configure the ESP32 BLE Arduino library to work with six characteristics. The library is initially configured so that the number of characteristics is limited to five per service and, as we are using a single service for all characteristics, is insufficient for this project. The maximum number of handles (i.e. characterisitics) can be changed https://github.com/nkolban/esp32-snippets/blob/master/cpp_utils/BLEServer.h#L67. I used 20. The ```BLEserver.h``` header file can be found in the ESP32 core library located (on my Mac): ```/Users/damianjwilliams/Library/Arduino15/packages/esp32/hardware/esp32/libraries/BLE/src/BLEserver.h```.
 
 
-Computer (Client; I used a Mac)
+**Computer (Client; I used a Mac)**
 
 Install the BLE client [bleak](https://github.com/hbldh/bleak) and other required Python packages. 
 
@@ -39,7 +39,7 @@ Determine ESP32 address.  It is a different process for Macs and PCs. For Macs, 
 For the PC you need to run a script on the ESP32 shown [here](https://randomnerdtutorials.com/get-change-esp32-esp8266-mac-address-arduino/) and it will be something like ```21:71:86:CC:09:05```.
 
 Determine the Handle number associated with each characteristic. In bleak all notifications have the characteristic’s integer handle instead of its UUID as
-a string as the first argument sender sent to notification callbacks. To determine the handle of each characteristics run run ```service_explorer.py``` from ```bleak/examples``` remembering to change the address on `line 59`. The output will look like
+a string as the first argument sender sent to notification callbacks. To determine the handle of each characteristics run  ```service_explorer.py``` from ```bleak/examples``` remembering to change the address on `line 59`. The output will look like
 ```
 [Service] 4fafc201-1fb5-459e-8fcc-c5c9c331914b (Handle: 40): Unknown
 	[Characteristic] beb5483e-36e1-4688-b7f5-ea07361b26a8 (Handle: 41): Unknown (read,write,notify,indicate), Value: b'2529'
@@ -49,10 +49,24 @@ a string as the first argument sender sent to notification callbacks. To determi
 	[Characteristic] a9fe148e-fdf2-431b-9ee8-af7e5ff43d07 (Handle: 47): Unknown (read,write,notify,indicate), Value: b'2690'
  ...
  ```
- The handle is found after the Characteristic UUID. It may well be different to those shown above. Keep a note of the Handle. The handle is important as it is used to identify the sensor measurement in the `BLE_DHT_BME_RT.py` script
+ The handle is found after the Characteristic UUID. It may well be different to those shown above. Keep a note of the handle number and make sure you know which characteristic is associated with which sensor reading. The handle number is important as it is used to identify the sensor measurement in the `BLE_DHT_BME_RT.py` script.
+ 
+Change the address on `line 12` of `BLE_DHT_BME_RT.py` to that determined above. 
+ 
+Change the ```sender``` to handle numbers on lines between 161 - 186. In this example, we know that handle 41 is associated with `beb5483e-36e1-4688-b7f5-ea07361b26a8` (from running `service_explorer.py`), and we know the characteristic is associated with the BME280 temperature measurement (defined in the ESP32 code) and hence the measurement will be plotted on `plot1`.
+
+```
+           if sender == 41:
+
+                self.update_plot1(measurement)
+
+```
+
+Change the file path on `line 237` to the directory where you would like the log data to be stored.
  
  
+ I found that with six characteristics some of the measurements were dropped or corrupted. I filtered the measurements to < 120 on `line 158` as a work around to stop stange numbers being recorded/plotted. I didn't see a similar problem using two characteristics. 
  
- 
+ You can plot the CSV file using the R script (changing the handle numbers as appropriate). 
  
 
