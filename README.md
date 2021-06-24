@@ -13,7 +13,7 @@ This repository contains the scripts required to measure temperature and humidit
 
 ## Usage
 
-[My image](username.github.com/repository/img/image.jpg)
+![My image](https://github.com/damianjwilliams/BLE_DHT_BME_RT/blob/main/BLE_DHT_BME_RT.png)
 
  
  The ESP32 BLE Arduino library is initially configured so that the number of characteristics is limited to five, which for this project is insufficient. The maximum number of maximum number of handles (i.e. characterisitics) can be changed https://github.com/nkolban/esp32-snippets/blob/master/cpp_utils/BLEServer.h#L67. I just used 20. This header file can be found in the ESP32 core library located (on my Mac): /Users/damianjwilliams/Library/Arduino15/packages/esp32/hardware/esp32/libraries/BLE/src/BLEserver.h. 
