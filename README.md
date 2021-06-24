@@ -23,7 +23,9 @@ Upload the ESP32 and sensor libraries to the ESP32
 Configure the ESP32 BLE Arduino library to work with six characteristics. The library is initially configured so that the number of characteristics is limited to five per service and, as we are using a single service for all characteristics, is insufficient for this project. The maximum number of handles (i.e. characterisitics) can be changed https://github.com/nkolban/esp32-snippets/blob/master/cpp_utils/BLEServer.h#L67. I used 20. The ```BLEserver.h``` header file can be found in the ESP32 core library located (on my Mac): ```/Users/damianjwilliams/Library/Arduino15/packages/esp32/hardware/esp32/libraries/BLE/src/BLEserver.h```.
 
 
-**Computer (Client; I used a Mac)**
+**Computer (Client)**
+
+I used a Mac running Python 3.9. 
 
 Install the BLE client [bleak](https://github.com/hbldh/bleak) and other required Python packages. 
 
