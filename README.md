@@ -39,6 +39,20 @@ Determine ESP32 address.  It is a different process for Macs and PCs. For Macs, 
 For the PC you need to run a script on the ESP32 shown [here](https://randomnerdtutorials.com/get-change-esp32-esp8266-mac-address-arduino/) and it will be something like ```21:71:86:CC:09:05```.
 
 Determine the Handle number associated with each characteristic. In bleak all notifications have the characteristic’s integer handle instead of its UUID as
-a string as the first argument sender sent to notification callbacks. To determine the handle of each characteristics run run ```service_explorer.py``` from ```bleak/examples``` remembering to change the address on line `59`. 
+a string as the first argument sender sent to notification callbacks. To determine the handle of each characteristics run run ```service_explorer.py``` from ```bleak/examples``` remembering to change the address on `line 59`. The output will look like
+```
+[Service] 4fafc201-1fb5-459e-8fcc-c5c9c331914b (Handle: 40): Unknown
+	[Characteristic] beb5483e-36e1-4688-b7f5-ea07361b26a8 (Handle: 41): Unknown (read,write,notify,indicate), Value: b'2529'
+		[Descriptor] 00002902-0000-1000-8000-00805f9b34fb (Handle: 43): Client Characteristic Configuration) | Value: b'\x00\x00'
+	[Characteristic] 16d3930d-2523-4e25-bee8-86c84708b63c (Handle: 44): Unknown (read,write,notify,indicate), Value: b'3759'
+		[Descriptor] 00002902-0000-1000-8000-00805f9b34fb (Handle: 46): Client Characteristic Configuration) | Value: b'\x00\x00'
+	[Characteristic] a9fe148e-fdf2-431b-9ee8-af7e5ff43d07 (Handle: 47): Unknown (read,write,notify,indicate), Value: b'2690'
+ ...
+ ```
+ The handle is found after the Characteristic UUID. It may well be different to those shown above. Keep a note of the Handle. The handle is important as it is used to identify the sensor measurement in the `BLE_DHT_BME_RT.py` script
+ 
+ 
+ 
+ 
  
 
