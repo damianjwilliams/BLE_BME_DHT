@@ -13,17 +13,32 @@ This repository contains the scripts required to measure temperature and humidit
 
 ## Usage
 
+ESP32 (Server)
+ - Wire up sensors and ESP as shown below
+ 
 ![My image](https://github.com/damianjwilliams/BLE_DHT_BME_RT/blob/main/BLE_DHT_BME_RT.png)
 
- 
- The ESP32 BLE Arduino library is initially configured so that the number of characteristics is limited to five, which for this project is insufficient. The maximum number of maximum number of handles (i.e. characterisitics) can be changed https://github.com/nkolban/esp32-snippets/blob/master/cpp_utils/BLEServer.h#L67. I just used 20. This header file can be found in the ESP32 core library located (on my Mac): /Users/damianjwilliams/Library/Arduino15/packages/esp32/hardware/esp32/libraries/BLE/src/BLEserver.h. 
+Upload the ESP32 and sensor libraries to the ESP32
+
+Configure the ESP32 BLE Arduino library to work with six characteristics. The library is initially configured so that the number of characteristics is limited to five per service and, as we are using a single service for all characteristics, is insufficient for this project. The maximum number of handles (i.e. characterisitics) can be changed https://github.com/nkolban/esp32-snippets/blob/master/cpp_utils/BLEServer.h#L67. I used 20. The ```BLEserver.h``` header file can be found in the ESP32 core library located (on my Mac): ```/Users/damianjwilliams/Library/Arduino15/packages/esp32/hardware/esp32/libraries/BLE/src/BLEserver.h```.
 
 
-The BLE client is the computer running Python using [bleak](https://github.com/hbldh/bleak) python package. 
+Computer (Client; I used a Mac)
 
-#Determine ESP32 address
-To run the code BLE_DHT_BME_RT python code, it is necessary to determine the address of the ESP32. It is a different process for Macs and PCs. For Macs, run ```discover.py``` from the bleak examples and the address will be listed next to the ESP32DHT (which is the names assigned in the ESP32 code). It will look similar to: ```6C9F597F-3452-4AAB-806B-D2558588D50D```. For the PC you need to run a script on the ESP32 shown [here](https://randomnerdtutorials.com/get-change-esp32-esp8266-mac-address-arduino/) and it will be something like ```21:71:86:CC:09:05```.
+Install the BLE client [bleak](https://github.com/hbldh/bleak) and other required Python packages. 
 
-Determine the Handle number associated with each characterisitic.
+Determine ESP32 address.  It is a different process for Macs and PCs. For Macs, run ```discover.py``` from ```bleak/examples``` and the address will be listed in the terminal window next to the ESP32DHT (which is the names assigned in the ESP32 code). In this case : ```6C9F597F-3452-4AAB-806B-D2558588D50D```. 
+
+```
+5FFE1058-C77D-4E41-B0B9-D6D48A43D1BA: Unknown
+91E60FCF-A821-4E97-A1F1-16FC602D8C3F: Unknown
+6C9F597F-3452-4AAB-806B-D2558588D50D: ESP32DHT
+1474C2A5-DBA3-400A-8236-8397D4AB73AE: Unknown
+```
+
+For the PC you need to run a script on the ESP32 shown [here](https://randomnerdtutorials.com/get-change-esp32-esp8266-mac-address-arduino/) and it will be something like ```21:71:86:CC:09:05```.
+
+Determine the Handle number associated with each characteristic. In bleak all notifications have the characteristic’s integer handle instead of its UUID as
+a string as the first argument sender sent to notification callbacks. To determine the handle of each characteristics run run ```service_explorer.py``` from ```bleak/examples``` remembering to change the address on line `59`. 
  
 
