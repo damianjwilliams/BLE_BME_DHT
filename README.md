@@ -2,10 +2,19 @@
 
 This repository contains the scripts required to measure temperature and humidity using DHT11, DHT22 and BME280 sensors hooked up to an ESP32 microcontroller acting as a server. Sensor data is streamed via Bluetooth Low Energy to a client computer running Python. The data is plotted in real-time using pyqtgraph. You can see it in action on this [video](https://youtu.be/ymS4U1X46Kg).
 
- The ESP32 was purchased from [Amazon](https://www.amazon.com/MELIFE-Development-Dual-Mode-Microcontroller-Integrated/dp/B07Q576VWZ/ref=cm_cr_arp_d_product_top?ie=UTF8). ESP32 installation instructions can be found [here](https://randomnerdtutorials.com/installing-the-esp32-board-in-arduino-ide-windows-instructions/). It will work using the 'ESP32 Dev Module' board setting in the Arduino IDE. More information aboult ESP32 and Bluetooth Low Energy can be found in another great [Random Nerd Tutorial](https://randomnerdtutorials.com/esp32-bluetooth-low-energy-ble-arduino-ide/). The ESP32 BLE code was based on the 'BLE_server' code from the ESP32 BLE Arduino library. Automatically installed when you install the ESP32 on the Arduino IDE. 
+## Requirements
 
- The Adafruit [DHT11](https://www.mouser.com/ProductDetail/Adafruit/386?qs=GURawfaeGuDbeGFpZ2393w%3D%3D) (Mfr. #: 386), and [DHT22](https://www.mouser.com/ProductDetail/Adafruit/385?qs=GURawfaeGuCJCHEuv7lcfg%3D%3D)(Mfr. #:
- 385), were obtained from Mouser Electronics and require the [Arduino DHT Sensor Library](https://github.com/adafruit/DHT-sensor-library). The [BME280](https://www.sparkfun.com/products/13676) was from Sparkfun and requires the [BME280 Arduino Library](https://github.com/sparkfun/SparkFun_BME280_Arduino_Library).
+ - ESP32. Purchased from [Amazon](https://www.amazon.com/MELIFE-Development-Dual-Mode-Microcontroller-Integrated/dp/B07Q576VWZ/ref=cm_cr_arp_d_product_top?ie=UTF8). ESP32 installation instructions can be found [here](https://randomnerdtutorials.com/installing-the-esp32-board-in-arduino-ide-windows-instructions/). It will work using the 'ESP32 Dev Module' board setting in the Arduino IDE. More information aboult ESP32 and Bluetooth Low Energy can be found in another great [Random Nerd Tutorial](https://randomnerdtutorials.com/esp32-bluetooth-low-energy-ble-arduino-ide/). The ESP32 BLE code was based on the 'BLE_server' code from the ESP32 BLE Arduino library. Automatically installed when you install the ESP32 on the Arduino IDE. 
+
+ - [DHT11](https://www.mouser.com/ProductDetail/Adafruit/386?qs=GURawfaeGuDbeGFpZ2393w%3D%3D) (Mfr. #: 386)
+ -  [DHT22](https://www.mouser.com/ProductDetail/Adafruit/385?qs=GURawfaeGuCJCHEuv7lcfg%3D%3D)(Mfr. #: 385) Both DHT sensors were obtained from Mouser Electronics and require the [Arduino DHT Sensor Library](https://github.com/adafruit/DHT-sensor-library). 
+ -  [BME280](https://www.sparkfun.com/products/13676) was from Sparkfun and requires the [BME280 Arduino Library](https://github.com/sparkfun/SparkFun_BME280_Arduino_Library).
+ -  Python 3.9 and libraries described in python script. 
+
+## Usage
+
+[My image](username.github.com/repository/img/image.jpg)
+
  
  The ESP32 BLE Arduino library is initially configured so that the number of characteristics is limited to five, which for this project is insufficient. The maximum number of maximum number of handles (i.e. characterisitics) can be changed https://github.com/nkolban/esp32-snippets/blob/master/cpp_utils/BLEServer.h#L67. I just used 20. This header file can be found in the ESP32 core library located (on my Mac): /Users/damianjwilliams/Library/Arduino15/packages/esp32/hardware/esp32/libraries/BLE/src/BLEserver.h. 
 
