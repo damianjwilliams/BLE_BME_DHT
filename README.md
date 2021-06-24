@@ -53,7 +53,7 @@ a string as the first argument sender sent to notification callbacks. To determi
  
 Change the address on `line 12` of `BLE_DHT_BME_RT.py` to that determined above. 
  
-Change the ```sender``` to handle numbers on lines between 161 - 186. In this example, we know that handle 41 is associated with `beb5483e-36e1-4688-b7f5-ea07361b26a8` (from running `service_explorer.py`), and we know the characteristic is associated with the BME280 temperature measurement (defined in the ESP32 code) and hence the measurement will be plotted on `plot1`.
+Change the ```sender```number to handle numbers on lines between 161 - 186  of `BLE_DHT_BME_RT.py`. In this example, we know that handle 41 is associated with `beb5483e-36e1-4688-b7f5-ea07361b26a8` (from running `service_explorer.py`), and we know the characteristic is associated with the BME280 temperature measurement (defined in the ESP32 code) and hence the measurement will be plotted on `plot1`.
 
 ```
            if sender == 41:
@@ -64,9 +64,8 @@ Change the ```sender``` to handle numbers on lines between 161 - 186. In this ex
 
 Change the file path on `line 237` to the directory where you would like the log data to be stored.
  
+I found that with six characteristics some of the measurements were dropped or corrupted. I filtered the measurements to < 120 on `line 158` as a work around to stop strange numbers being recorded/plotted. I didn't see a similar problem using two characteristics. 
  
- I found that with six characteristics some of the measurements were dropped or corrupted. I filtered the measurements to < 120 on `line 158` as a work around to stop stange numbers being recorded/plotted. I didn't see a similar problem using two characteristics. 
- 
- You can plot the CSV file using the R script (changing the handle numbers as appropriate). 
+You can plot the CSV file using the R script (changing the handle numbers, etc as appropriate). 
  
 
