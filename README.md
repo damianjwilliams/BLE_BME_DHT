@@ -27,7 +27,7 @@ Configure the ESP32 BLE Arduino library to work with six characteristics. The li
 
 I used a Mac running Python 3.9. 
 
-Install the BLE client [bleak](https://github.com/hbldh/bleak) and other required Python packages. 
+Install the BLE client [bleak](https://github.com/hbldh/bleak) and other required Python packages. [Pyqtgraph does not support asyncio](https://github.com/hbldh/bleak/issues/264) by default but you can use [qasync](https://github.com/CabbageDevelopment/qasync) to creates a new eventloop that does support Qt. Thanks to [eyllanesc's answer](https://stackoverflow.com/questions/67172127/real-time-plotting-of-ble-data-using-bleak-and-pyqtgraph-packages) on Stack Overflow 
 
 Determine ESP32 address.  It is a different process for Macs and PCs. For Macs, run ```discover.py``` from ```bleak/examples``` and the address will be listed in the terminal window next to the ESP32DHT (which is the names assigned in the ESP32 code). In this case : ```6C9F597F-3452-4AAB-806B-D2558588D50D```. 
 
